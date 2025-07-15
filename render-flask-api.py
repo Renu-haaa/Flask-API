@@ -21,6 +21,17 @@ def get_edge_mask(cropped):
     image_base64 = base64.b64encode(buffered.getvalue()).decode("utf-8")
     return {"image_Base64": image_base64}
 
+
+#GET: Root endpoint with API key
+@app.route("/", methods=["GET"])
+def home():
+    api_key = request.headers.get("x-api-key")
+    if api_key != API_KEY:
+        return jsonify({"error": "Unauthorized"}), 401
+    return jsonify({"message": "Welcome. You are authorized."})
+
+# POST: Edge detection
+
 @app.route("/get_edges", methods=["POST"])
 def edge_det_func():
     api_key = request.headers.get("x-api-key")
