@@ -28,8 +28,8 @@ def get_edge_mask(cropped):
 def home():
     api_key = request.headers.get("x-api-key")
     if api_key != API_KEY:
-        return jsonify({"error": "Unauthorized"}), 401
-    return jsonify({"message": "Welcome with a valid API key"})
+        return "Unauthorized", 401
+    return "Welcome with a valid API key"
 
 # POST: Edge detection
 
