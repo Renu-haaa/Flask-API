@@ -5,14 +5,15 @@ import cv2
 from io import BytesIO
 from PIL import Image
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenv  #dot environment 
 
 # Load API key from .env
-load_dotenv()
+load_dotenv()  
 API_KEY = os.getenv("API_KEY")
 
 app = Flask(__name__)
 
+#function to create edge mask 
 def get_edge_mask(cropped):
     edges = cv2.Canny(cropped, threshold1=0, threshold2=255, L2gradient=False, apertureSize=7)
     edge_img = Image.fromarray(edges)
@@ -28,7 +29,7 @@ def home():
     api_key = request.headers.get("x-api-key")
     if api_key != API_KEY:
         return jsonify({"error": "Unauthorized"}), 401
-    return jsonify({"message": "Welcome. You are authorized."})
+    return jsonify({"message": "Welcome with a valid API key"})
 
 # POST: Edge detection
 
@@ -49,7 +50,3 @@ def edge_det_func():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
     
-@app.route("/", methods=["GET"])
-def home():
-    return "Flask Edge Detection API is Running"
-
