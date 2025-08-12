@@ -5,9 +5,9 @@ import cv2
 from io import BytesIO
 from PIL import Image
 import os
-from dotenv import load_dotenv  #dot environment 
+from dotenv import load_dotenv  #lets you keep secrets (like API keys) in a local .env file instead of hardcoding
 
-# Load API key from .env
+# Load API key from .env --> loads variables from .env into the process and grabs API_KEY
 load_dotenv()  
 API_KEY = os.getenv("API_KEY")
 
@@ -20,7 +20,7 @@ def get_edge_mask(cropped):
     buffered = BytesIO()
     edge_img.save(buffered, format="PNG")
     image_base64 = base64.b64encode(buffered.getvalue()).decode("utf-8")
-    return {"image_Base64": image_base64}
+    return {"image_base64": image_base64}
 
 
 #GET: Root endpoint with API key
