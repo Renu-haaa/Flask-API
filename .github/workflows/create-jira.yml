@@ -18,7 +18,7 @@ jobs:
           --data '{
             "fields": {
               "project": {
-                "key": "MAI"
+                "key": "RM"
               },
               "summary": "${{ github.event.issue.title }}",
               "description": {
